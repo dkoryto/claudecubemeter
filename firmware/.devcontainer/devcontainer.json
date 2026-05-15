@@ -1,0 +1,45 @@
+{
+	"name": "Geekmagic OpenFirmware",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"platformio.platformio-ide",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"redhat.vscode-yaml",
+				"esbenp.prettier-vscode"
+			]
+		}
+	},
+	"runArgs": [
+		"--name=geekmagic-openfirmware-dev",
+		"--hostname=geekmagic-openfirmware-dev",
+		"-v",
+		"${env:HOME}/.ssh:/home/debian/.ssh:ro",
+		"-v",
+		"${env:HOME}/.gitconfig:/home/debian/.gitconfig:ro",
+		"-v",
+		"/run/user/1000/gnupg:/home/debian/.gnupg-host",
+		"-v",
+		"/run/udev:/run/udev",
+		"-v",
+		"/etc/localtime:/etc/localtime:ro",
+		"-v",
+		"/dev:/dev",
+		"-v",
+		"${env:HOME}/.platformio:/home/debian/.platformio",
+		"--device-cgroup-rule=c 166:* rmw",
+		"--device-cgroup-rule=c 188:* rmw"
+	],
+	"containerEnv": {
+		"GPG_AGENT_INFO": "/run/gnupg/S.gpg-agent:0:1",
+		"GNUPGHOME": "/home/debian/.gnupg"
+	},
+	"postStartCommand": "ln -sf /home/debian/.gnupg-host/S.gpg-agent /home/debian/.gnupg/S.gpg-agent"
+}

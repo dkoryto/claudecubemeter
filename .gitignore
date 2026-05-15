@@ -1,0 +1,32 @@
+# Local clones of upstream projects (kept for reference, not part of this repo)
+geekmagic-src/
+clawdmeter-src/
+
+# Claude Code session artifacts
+.claude/
+
+# Build artifacts
+firmware/.pio/
+firmware/.pio-build/
+*.pio-build/
+
+# Flash backups
+*.bin
+!firmware/data/gif/*.gif
+
+# Local creds — copy config.example.json → config.json and fill before flash
+firmware/data/config.json
+
+# OS / editor
+.DS_Store
+*.swp
+*~
+.vscode/.ropeproject
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+/tmp/claude_proxy.log

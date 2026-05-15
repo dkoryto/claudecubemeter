@@ -1,0 +1,6 @@
+{
+  "wifi_ssid": "YOUR_WIFI_SSID",
+  "wifi_password": "YOUR_WIFI_PASSWORD",
+  "api_token": "change-me-on-first-boot",
+  "lcd_rotation": 0
+}

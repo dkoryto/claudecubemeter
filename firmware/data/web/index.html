@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GeekMagic Open Firmware</title>
+    <link rel="stylesheet" href="./css/pico.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/alpinejs.min.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/themeSwitcher.js"></script>
+    <script src="./js/gifUploadHandler.js"></script>
+    <script src="./js/otaUploadHandler.js"></script>
+    <script src="./js/wifiHandler.js"></script>
+    <script src="./js/rebootHandler.js"></script>
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header id="header-placeholder"></header>
+
+      <section>
+        <div style="margin-top: 2em; display: flex; gap: 1em; flex-wrap: wrap">
+          <a href="./wifi.html">
+            <button type="button" class="secondary">WiFi</button>
+          </a>
+          <a href="./ntp.html">
+            <button type="button" class="secondary">Time (NTP)</button>
+          </a>
+          <a href="./rotation.html">
+            <button type="button" class="secondary">Screen Rotation</button>
+          </a>
+          <a href="./update.html">
+            <button type="button" class="secondary">
+              Firmware / FS Update
+            </button>
+          </a>
+          <a href="./gif_upload.html">
+            <button type="button" class="secondary">Upload GIF</button>
+          </a>
+          <a href="./token.html">
+            <button type="button" class="secondary">API Token</button>
+          </a>
+          <a href="./clawd.html">
+            <button type="button">Clawdmeter</button>
+          </a>
+          <a href="./logs.html">
+            <button type="button" class="secondary">Logs</button>
+          </a>
+        </div>
+
+        <div x-data="rebootHandler()">
+          <button
+            class="contrast"
+            x-bind:disabled="loading"
+            x-on:click="reboot"
+          >
+            Reboot
+          </button>
+          <p x-text="message"></p>
+        </div>
+      </section>
+
+      <footer id="footer-placeholder"></footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "wifi_ssid": "",
+  "wifi_password": "",
+  "api_token": "your_secure_token_here",
+  "lcd_rotation": 4
+}

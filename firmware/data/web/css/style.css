@@ -1,0 +1,231 @@
+[data-theme="light"] #theme-sun-rays {
+  fill: #111 !important;
+}
+
+[data-theme="light"] #theme-main-circle {
+  fill: #111 !important;
+}
+
+[data-theme="dark"] #theme-main-circle {
+  fill: transparent !important;
+}
+.theme-switch-btn svg {
+  display: block;
+  stroke: #222;
+  transition:
+    opacity 0.3s,
+    transform 0.5s;
+  opacity: 1;
+}
+
+[data-theme="dark"] .theme-switch-btn svg {
+  stroke: #f1f1f1;
+}
+
+.theme-switch-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: filter 0.2s;
+  z-index: 10;
+}
+
+.theme-switch-btn svg {
+  display: block;
+  stroke: #222;
+}
+
+[data-theme="dark"] .theme-switch-btn svg {
+  stroke: #f1f1f1;
+}
+
+.theme-switch-btn:hover svg {
+  filter: drop-shadow(0 0 2px #0077b6);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+#theme-waterdrop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: var(--theme-waterdrop-bg, #fff);
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: clip-path, background;
+  opacity: 1;
+}
+#theme-waterdrop-overlay.active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+main.container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+}
+
+[data-theme="dark"] {
+  background: #181a1b;
+  color: #f1f1f1;
+}
+
+[data-theme="dark"] a {
+  color: #8ecae6;
+}
+
+[data-theme="dark"] header,
+[data-theme="dark"] footer {
+  background: #181a1b;
+}
+[data-theme="light"] header,
+[data-theme="light"] footer {
+  background: #fff;
+}
+
+[data-theme="light"] {
+  background: #fff;
+  color: #222;
+}
+
+[data-theme="light"] a {
+  color: #0077b6;
+}
+
+details.dropdown {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+details.dropdown[open] ul {
+  background: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  padding: 0.5em 0;
+  margin: 0;
+  list-style: none;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+details.dropdown ul li a {
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+details.dropdown ul li a:hover {
+  background: #eee;
+}
+
+.wifi-back-link {
+  margin-left: 2em;
+}
+.wifi-section {
+  margin-top: 2rem;
+}
+.wifi-connect {
+  margin-top: 1.5rem;
+}
+.password-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.action-row {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.scan-table-container {
+  margin-top: 1em;
+}
+.wifi-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.wifi-table th,
+.wifi-table td {
+  padding: 0.4rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+.wifi-table th {
+  text-align: left;
+}
+.ssid-cell {
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.signal-cell {
+  color: #666;
+}
+.signal-cell .bars {
+  font-family: monospace;
+  color: #666;
+  margin-left: 0.5rem;
+}
+.no-networks {
+  padding: 0.6rem;
+}
+.scan-btn {
+  margin-right: 0.6rem;
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  padding: 0.15rem;
+  cursor: pointer;
+  color: inherit;
+}
+.eye-btn svg {
+  display: block;
+}
+.eye-btn {
+  background: none;
+  border: none;
+  padding: 0.15rem;
+  cursor: pointer;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+.eye-btn svg {
+  display: block;
+  overflow: visible;
+  width: 18px;
+  height: 18px;
+}

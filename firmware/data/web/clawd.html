@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clawdmeter</title>
+    <link rel="stylesheet" href="./css/pico.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/alpinejs.min.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/themeSwitcher.js"></script>
+    <script src="./js/clawdHandler.js"></script>
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header id="header-placeholder"></header>
+
+      <a href="./index.html" class="wifi-back-link">← Back to Home</a>
+
+      <section x-data="clawdHandler()" x-init="init()">
+        <h2>Clawdmeter</h2>
+        <p>
+          Polls Anthropic API rate-limit headers every 60s and shows Claude Code
+          usage on the device. Token is stored in EEPROM (obfuscated) and never
+          leaves the device.
+        </p>
+
+        <article>
+          <header>Live status</header>
+          <div x-show="!status.configured">
+            <p><strong>No Anthropic token configured.</strong></p>
+          </div>
+          <div x-show="status.configured && !status.valid">
+            <p><strong>Polling failed.</strong></p>
+            <p x-text="status.last_error"></p>
+            <p x-show="status.http_code">HTTP <span x-text="status.http_code"></span></p>
+          </div>
+          <div x-show="status.valid">
+            <p>
+              <strong>5h session:</strong>
+              <span x-text="status.session_pct + '%'"></span>
+              · resets in <span x-text="formatMin(status.session_reset_min)"></span>
+            </p>
+            <p>
+              <strong>7d weekly:</strong>
+              <span x-text="status.weekly_pct + '%'"></span>
+              · resets in <span x-text="formatMin(status.weekly_reset_min)"></span>
+            </p>
+            <p>
+              <strong>Status:</strong>
+              <span x-text="status.status"></span> · last poll
+              <span x-text="formatPollAgo(status.last_poll_unix)"></span>
+            </p>
+          </div>
+          <footer>
+            <button type="button" @click="refresh()" :disabled="loading">
+              Force refresh
+            </button>
+          </footer>
+        </article>
+
+        <article>
+          <header>Anthropic token</header>
+          <p>
+            Paste your Claude Code OAuth access token (from
+            <code>~/.claude/.credentials.json</code> on Linux or the
+            <code>Claude Code-credentials</code> Keychain item on macOS — the
+            <code>accessToken</code> field).
+          </p>
+          <p>
+            Console API keys (<code>sk-ant-...</code>) work too but show only
+            developer-tier rate limits, not your Claude Code subscription usage.
+          </p>
+          <label for="anthropic-token">Token</label>
+          <div class="password-row">
+            <input
+              id="anthropic-token"
+              x-model="anthropicToken"
+              :type="showToken ? 'text' : 'password'"
+              autocomplete="off"
+              placeholder="eyJ..."
+            />
+            <button
+              type="button"
+              @click="showToken = !showToken"
+              class="eye-btn"
+              aria-label="Toggle visibility"
+            >
+              <span x-text="showToken ? '🙈' : '👁'"></span>
+            </button>
+          </div>
+          <p>
+            Currently stored:
+            <code x-text="config.anthropic_token_preview || '(none)'"></code>
+          </p>
+          <footer>
+            <button type="button" @click="saveToken()" :disabled="loading">
+              Save token
+            </button>
+          </footer>
+          <p x-text="tokenMsg"></p>
+        </article>
+
+        <article>
+          <header>Shortcut webhook (optional)</header>
+          <p>
+            The original Clawdmeter has physical buttons that send keystrokes to
+            the host over BLE HID. This device has no BLE, so shortcuts are
+            forwarded as <code>POST {"key":"&lt;name&gt;"}</code> to a webhook
+            URL of your choice. Run a small helper on your machine (see README)
+            to translate them into real keystrokes.
+          </p>
+          <label for="webhook-url">Webhook URL</label>
+          <input
+            id="webhook-url"
+            x-model="webhookUrl"
+            type="url"
+            placeholder="http://192.168.1.42:8080/clawd-shortcut"
+          />
+          <footer>
+            <button type="button" @click="saveWebhook()" :disabled="loading">
+              Save webhook
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              @click="sendShortcut('voice')"
+              :disabled="loading || !webhookUrl"
+            >
+              Voice mode (Space)
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              @click="sendShortcut('toggle')"
+              :disabled="loading || !webhookUrl"
+            >
+              Mode toggle (Shift+Tab)
+            </button>
+          </footer>
+          <p x-text="webhookMsg"></p>
+        </article>
+      </section>
+
+      <footer id="footer-placeholder"></footer>
+    </main>
+  </body>
+</html>

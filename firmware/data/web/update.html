@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Firmware / FS Update</title>
+    <link rel="stylesheet" href="./css/pico.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/alpinejs.min.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/themeSwitcher.js"></script>
+    <script src="./js/gifUploadHandler.js"></script>
+    <script src="./js/otaUploadHandler.js"></script>
+    <script src="./js/wifiHandler.js"></script>
+    <script src="./js/rebootHandler.js"></script>
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header id="header-placeholder"></header>
+      <a href="./index.html" style="margin-left: 2em">← Back to Home</a>
+      <section>
+        <div x-data="otaUploadHandler()" style="margin-top: 2em">
+          <h2>Update firmware or FS</h2>
+          <form @submit.prevent="uploadFile">
+            <input type="file" x-ref="fileInput" required accept=".bin" />
+            <select x-model="uploadType">
+              <option value="firmware">Firmware</option>
+              <option value="fs">LittleFS (html/js/css/config)</option>
+            </select>
+            <button type="submit" x-bind:disabled="uploading">Upload</button>
+          </form>
+          <template x-if="uploading">
+            <div style="margin-top: 1em">
+              <label>Progress</label>
+              <progress max="100" :value="progress"></progress>
+              <div
+                style="
+                  display: flex;
+                  gap: 1em;
+                  align-items: center;
+                  margin-top: 0.5em;
+                "
+              >
+                <div><strong x-text="progress + '%'"></strong></div>
+                <div x-text="etaText"></div>
+                <button @click="cancelUpload" type="button">Cancel</button>
+              </div>
+            </div>
+          </template>
+          <p x-text="uploadMessage"></p>
+        </div>
+      </section>
+
+      <footer id="footer-placeholder"></footer>
+    </main>
+  </body>
+</html>

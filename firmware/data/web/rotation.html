@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Screen Rotation</title>
+    <link rel="stylesheet" href="./css/pico.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/alpinejs.min.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/themeSwitcher.js"></script>
+    <script src="./js/rotationHandler.js"></script>
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header id="header-placeholder"></header>
+
+      <a href="./index.html" class="wifi-back-link">← Back to Home</a>
+
+      <section x-data="rotationHandler()" x-init="init()">
+        <h2>Display Rotation</h2>
+
+        <p>Choose a display orientation and apply it immediately.</p>
+
+        <label for="screen-rotation">Rotation</label>
+        <select
+          id="screen-rotation"
+          x-model.number="rotation"
+          x-bind:disabled="loading"
+        >
+          <option value="0">Portrait (mode 0)</option>
+          <option value="1">Landscape right (mode 1)</option>
+          <option value="2">Upside down (mode 2)</option>
+          <option value="3">Landscape left (mode 3)</option>
+          <option value="4">Portrait mirrored (mode 4)</option>
+          <option value="5">Landscape right mirrored (mode 5)</option>
+          <option value="6">Upside down mirrored (mode 6)</option>
+          <option value="7">Landscape left mirrored (mode 7)</option>
+        </select>
+
+        <small
+          >Modes 4 to 7 are mirrored variants supported by the display
+          driver.</small
+        >
+
+        <div
+          style="margin-top: 0.5em; display: flex; gap: 0.5em; flex-wrap: wrap"
+        >
+          <button
+            type="button"
+            class="primary"
+            @click="saveRotation()"
+            x-bind:disabled="loading"
+          >
+            Save Rotation
+          </button>
+          <button
+            type="button"
+            @click="fetchRotation()"
+            x-bind:disabled="loading"
+          >
+            Refresh
+          </button>
+        </div>
+
+        <p x-text="statusMsg"></p>
+      </section>
+
+      <footer id="footer-placeholder"></footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,710 @@
+openapi: "3.0.0"
+info:
+  title: "GeekMagic-Open-Firmware API"
+  version: "1.0.0"
+servers:
+  - url: "http://{host}/"
+    description: "API Server for version 1"
+    variables:
+      host:
+        default: "localhost"
+paths:
+  /api/v1/wifi/scan:
+    get:
+      summary: "Scan available WiFi networks"
+      operationId: "op_v1_get_api_v1_wifi_scan"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "WiFi"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Scan available WiFi networks. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/wifi/connect:
+    post:
+      summary: "Connect to a WiFi network"
+      operationId: "op_v1_post_api_v1_wifi_connect"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "WiFi"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Connect to a WiFi network. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                ssid:
+                  type: "string"
+                password:
+                  type: "string"
+              required:
+                - "ssid"
+                - "password"
+              example:
+                ssid: "MyNetwork"
+                password: "password123"
+        required: true
+  /api/v1/wifi/status:
+    get:
+      summary: "Get WiFi connection status"
+      operationId: "op_v1_get_api_v1_wifi_status"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "WiFi"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get WiFi connection status. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/ntp/sync:
+    post:
+      summary: "Trigger NTP sync"
+      operationId: "op_v1_post_api_v1_ntp_sync"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "NTP"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Trigger NTP sync. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/ntp/status:
+    get:
+      summary: "Get NTP status"
+      operationId: "op_v1_get_api_v1_ntp_status"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "NTP"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get NTP status. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/ntp/config:
+    get:
+      summary: "Get NTP configuration"
+      operationId: "op_v1_get_api_v1_ntp_config"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "NTP"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get NTP configuration. This endpoint requires a valid bearer token in the Authorization header."
+    post:
+      summary: "Set NTP configuration"
+      operationId: "op_v1_post_api_v1_ntp_config"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "NTP"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Set NTP configuration. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                ntp_server:
+                  type: "string"
+              required:
+                - "ntp_server"
+              example:
+                ntp_server: "pool.ntp.org"
+        required: true
+  /api/v1/display/rotation:
+    get:
+      summary: "Get display rotation"
+      operationId: "op_v1_get_api_v1_display_rotation"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "Display"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get display rotation. This endpoint requires a valid bearer token in the Authorization header."
+    post:
+      summary: "Set display rotation"
+      operationId: "op_v1_post_api_v1_display_rotation"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "Display"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Set display rotation. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                rotation:
+                  type: "integer"
+              required:
+                - "rotation"
+              example:
+                rotation: 4
+        required: true
+  /api/v1/reboot:
+    post:
+      summary: "Reboot the device"
+      operationId: "op_v1_post_api_v1_reboot"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "System"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Reboot the device. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/ota/fw:
+    post:
+      summary: "Upload firmware (OTA)"
+      operationId: "op_v1_post_api_v1_ota_fw"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "OTA"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Upload firmware (OTA). This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: "object"
+        required: true
+  /api/v1/ota/fs:
+    post:
+      summary: "Upload filesystem (OTA)"
+      operationId: "op_v1_post_api_v1_ota_fs"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "OTA"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Upload filesystem (OTA). This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: "object"
+        required: true
+  /api/v1/ota/status:
+    get:
+      summary: "Get OTA status"
+      operationId: "op_v1_get_api_v1_ota_status"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "OTA"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get OTA status. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/ota/cancel:
+    post:
+      summary: "Cancel OTA"
+      operationId: "op_v1_post_api_v1_ota_cancel"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "OTA"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Cancel OTA. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/gif:
+    post:
+      summary: "Upload a GIF"
+      operationId: "op_v1_post_api_v1_gif"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "GIF"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Upload a GIF. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: "object"
+        required: true
+    delete:
+      summary: "Delete a GIF by name"
+      operationId: "op_v1_delete_api_v1_gif"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        404:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "GIF"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Delete a GIF by name. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+              required:
+                - "name"
+              example:
+                name: "animation.gif"
+        required: true
+    get:
+      summary: "List GIFs"
+      operationId: "op_v1_get_api_v1_gif"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "GIF"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - List GIFs. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/gif/play:
+    post:
+      summary: "Play a GIF by name"
+      operationId: "op_v1_post_api_v1_gif_play"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        404:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "GIF"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Play a GIF by name. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+              required:
+                - "name"
+              example:
+                name: "animation.gif"
+        required: true
+  /api/v1/gif/stop:
+    post:
+      summary: "Stop GIF playback"
+      operationId: "op_v1_post_api_v1_gif_stop"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "GIF"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Stop GIF playback. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/token/check:
+    get:
+      summary: "Check bearer token validity"
+      operationId: "op_v1_get_api_v1_token_check"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "Authentication"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Check bearer token validity. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/token/save:
+    post:
+      summary: "Save a new bearer token"
+      operationId: "op_v1_post_api_v1_token_save"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "Authentication"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Save a new bearer token. This endpoint requires a valid bearer token in the Authorization header."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                token:
+                  type: "string"
+              required:
+                - "token"
+              example:
+                token: "your_secure_token_value"
+        required: true
+  /api/v1/logs:
+    get:
+      summary: "Get recent logs"
+      operationId: "op_v1_get_api_v1_logs"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  logs:
+                    type: "array"
+                    items:
+                      type: "string"
+                  count:
+                    type: "integer"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "System"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Get recent logs. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/logs/download:
+    get:
+      summary: "Download logs as text file"
+      operationId: "op_v1_get_api_v1_logs_download"
+      responses:
+        200:
+          description: ""
+          content:
+            text/plain:
+              schema:
+                type: "string"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "System"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Download logs as text file. This endpoint requires a valid bearer token in the Authorization header."
+  /api/v1/logs/clear:
+    post:
+      summary: "Clear log buffer"
+      operationId: "op_v1_post_api_v1_logs_clear"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+        401:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: "object"
+      tags:
+        - "System"
+      security:
+        - bearerAuth: []
+      description: "**Requires Authentication** - Clear log buffer. This endpoint requires a valid bearer token in the Authorization header."
+components:
+  securitySchemes:
+    bearerAuth:
+      type: "http"
+      scheme: "bearer"
+      bearerFormat: "Token"
+      description: "Bearer token authentication. Include the token in the Authorization header as: Bearer <token>"
+tags:
+  - name: "Authentication"
+    description: "API Authentication endpoints"
+  - name: "GIF"
+    description: "API GIF endpoints"
+  - name: "NTP"
+    description: "API NTP endpoints"
+  - name: "OTA"
+    description: "API OTA endpoints"
+  - name: "System"
+    description: "API System endpoints"
+  - name: "WiFi"
+    description: "API WiFi endpoints"

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>System Logs</title>
+    <link rel="stylesheet" href="./css/pico.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/alpinejs.min.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/themeSwitcher.js"></script>
+    <script src="./js/logsHandler.js"></script>
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header id="header-placeholder"></header>
+
+      <a href="./index.html" class="wifi-back-link">← Back to Home</a>
+
+      <section x-data="logsHandler()" x-init="init()">
+        <h2>System Logs</h2>
+
+        <div
+          style="margin-bottom: 1em; display: flex; gap: 0.5em; flex-wrap: wrap"
+        >
+          <button
+            type="button"
+            class="primary"
+            @click="fetchLogs()"
+            x-bind:disabled="loading"
+          >
+            Refresh
+          </button>
+          <button
+            type="button"
+            class="secondary"
+            @click="downloadLogs()"
+            x-bind:disabled="loading"
+          >
+            Download
+          </button>
+          <button
+            type="button"
+            class="contrast"
+            @click="clearLogs()"
+            x-bind:disabled="loading"
+          >
+            Clear
+          </button>
+        </div>
+
+        <p>
+          <small x-text="'Showing ' + logs.length + ' log entries'"></small>
+        </p>
+        <p>
+          <small
+            x-text="'Only WARNING and ERROR logs are shown here for optimisation. Please check the serial output for more details.'"
+          ></small>
+        </p>
+
+        <div
+          style="
+            background: var(--pico-code-background-color);
+            padding: 1em;
+            border-radius: 4px;
+            max-height: 60vh;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.85em;
+          "
+        >
+          <template x-if="logs.length === 0">
+            <p style="color: var(--pico-muted-color)">No logs available</p>
+          </template>
+          <template x-for="(log, index) in logs" :key="index">
+            <div
+              x-text="log"
+              style="
+                white-space: pre-wrap;
+                word-break: break-all;
+                padding: 2px 0;
+                border-bottom: 1px solid var(--pico-muted-border-color);
+              "
+            ></div>
+          </template>
+        </div>
+
+        <p x-show="message" x-text="message" style="margin-top: 1em"></p>
+      </section>
+
+      <footer id="footer-placeholder"></footer>
+    </main>
+  </body>
+</html>
