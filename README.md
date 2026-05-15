@@ -8,7 +8,17 @@ cube. Port of [HermannBjorgvin/Clawdmeter](https://github.com/HermannBjorgvin/Cl
 [Times-Z/GeekMagic-Open-Firmware](https://github.com/Times-Z/GeekMagic-Open-Firmware)
 (ESP8266 + 240×240 ST7789), targeting the **GeekMagic SmallTV-Ultra**.
 
+![device](screenshots/demo.jpeg)
+
+The GeekMagic SmallTV-Ultra running ClaudeCubeMeter on a desk — 17 % session,
+10 % weekly, last proxy push 25 s ago.
+
 ![mockup](screenshots/mockup_grid.png)
+
+Top row, left to right: boot **splash** (5 s), first-run **no_token**, token
+set but proxy not pushing yet (**waiting**), Anthropic **error** (HTTP 401 /
+expired OAuth). Bottom row: the four data states the device cycles through,
+color-coded by usage band (green < 40 %, yellow < 70 %, orange < 90 %, red ≥ 90 %).
 
 ## Architecture
 
@@ -55,7 +65,8 @@ tools/
   claude_proxy.py     Anthropic poller + device push (required for live data)
   webhook_helper.py   optional, translates shortcut POSTs into keystrokes
   render_mockup.py    generates the screenshots in screenshots/
-screenshots/          layout mockups + comparison grid
+screenshots/          per-state mockups (splash, no_token, waiting, error,
+                      normal, warning, limited, live) + mockup_grid.png
 ```
 
 ## First-time setup
