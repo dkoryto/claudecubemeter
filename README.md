@@ -1,6 +1,5 @@
 # ClaudeCubeMeter
 
-*by Dariusz Koryto*
 
 A desk dashboard that shows your Claude Code rate-limit usage on a tiny LCD
 cube. Port of [HermannBjorgvin/Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter)
